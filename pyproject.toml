@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "daily_fantasy_sports_utilities"
+version = "1.0.0"
+description = "Utilities"
+authors = ["Jae Bradley <jae.b.bradley@gmail.com>"]
+maintainers = ["Jae Bradley <jae.b.bradley@gmail.com>"]
+license = "MIT"
+keywords = ["Daily Fantasy Sports", "DraftKings"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent"]
+repository = ""
+homepage = ""
+documentation= ""
+readme = "README.md"
+exclude = [
+    "tests",
+    "dist",
+    "docs",
+    "mkdocs.yml",
+    ".github",
+    ".pytest_cache",
+    ".coveragerc",
+    ".pylintrc",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+coverage = "^5.3"
+pytest = "^6.1.2"
+pylint = "^2.6.0"
+
+[tool.poetry.urls]
+issues = ""
+pull_requests = ""
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
