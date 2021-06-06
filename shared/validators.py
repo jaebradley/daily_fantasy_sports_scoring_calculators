@@ -1,4 +1,4 @@
-from shared.calculators.scoring import StatisticalValueCalculator, PointsCalculator, Rule, RuleValidator
+from shared.calculators.scoring import RuleValidator
 
 
 class AlwaysTrueValidator(RuleValidator):
@@ -7,8 +7,11 @@ class AlwaysTrueValidator(RuleValidator):
 
 
 class IdentityValidator(RuleValidator):
-    def test(self, value):
-        return value
+    def test(self, value: bool):
+        if value is True or value is False:
+            return value
+
+        raise ValueError("unknown value: {value}".format(value=value))
 
 
 always_true_validator = AlwaysTrueValidator()

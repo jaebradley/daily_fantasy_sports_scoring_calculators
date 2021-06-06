@@ -1,6 +1,5 @@
-from draft_kings.nba.classic.calculators.scoring.calculators import PointsScoredRule, ThreePointersMadeRule, \
-    AssistsRule, \
-    BlocksRule, StealsRule, ReboundsRule, TurnoversRule, DoubleDoubleRule, TripleDoubleRule
+from draft_kings.nba.rules import PointsScoredRule, ThreePointersMadeRule, AssistsRule, BlocksRule, StealsRule, \
+    ReboundsRule, TurnoversRule, DoubleDoubleRule, TripleDoubleRule
 from shared.calculators.scoring import GameTypePointsCalculator
 
 
