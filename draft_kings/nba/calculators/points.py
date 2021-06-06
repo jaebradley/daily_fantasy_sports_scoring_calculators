@@ -41,19 +41,14 @@ class TurnoverPointsCalculator(PointsCalculator):
         return value * -0.5
 
 
-class BooleanPointsCalculator(PointsCalculator):
-    def __init__(self, points_when_true: float, points_when_false: float):
-        self.points_when_true = points_when_true
-        self.points_when_false = points_when_false
-
+class DoubleDoublePointsCalculator(PointsCalculator):
     def calculate_points(self, value):
-        if value is True:
-            return self.points_when_true
+        return 1.5
 
-        if value is False:
-            return self.points_when_false
 
-        raise ValueError("unknown value: {value}".format(value=value))
+class TripleDoublePointsCalculator(PointsCalculator):
+    def calculate_points(self, value):
+        return 3
 
 
 points_scored_points_calculator = PointsScoredPointsCalculator()
@@ -63,6 +58,6 @@ steals_points_calculator = StealsPointsCalculator()
 blocks_points_calculator = BlocksPointsCalculator()
 turnovers_points_calculator = TurnoverPointsCalculator()
 rebounds_points_calculator = ReboundsPointsCalculator()
-double_double_points_calculator = BooleanPointsCalculator(1.5, 0)
-triple_double_points_calculator = BooleanPointsCalculator(3, 0)
+double_double_points_calculator = DoubleDoublePointsCalculator()
+triple_double_points_calculator = TripleDoublePointsCalculator()
 zero_points_calculator = ZeroPointsCalculator()
