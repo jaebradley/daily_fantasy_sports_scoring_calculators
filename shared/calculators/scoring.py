@@ -33,6 +33,14 @@ class Rule:
 
         return self.points_calculator_when_rule_is_false.calculate_points(value)
 
+    def __eq__(self, other):
+        if isinstance(other, Rule):
+            return other.points_calculator_when_rule_is_true == self.points_calculator_when_rule_is_true \
+                   and other.points_calculator_when_rule_is_false == self.points_calculator_when_rule_is_false \
+                   and other.validator == self.validator and other.value_calculator == self.value_calculator
+
+        return False
+
 
 class GameTypePointsCalculator(PointsCalculator):
     def __init__(self, rules: Set[Rule]):
@@ -40,10 +48,8 @@ class GameTypePointsCalculator(PointsCalculator):
 
     def calculate_points(self, statistics):
         return sum(
-           map(
-               lambda rule: rule.apply(statistics),
-               self.rules
-           )
+            map(
+                lambda rule: rule.apply(statistics),
+                self.rules
+            )
         )
-
-
