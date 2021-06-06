@@ -6,13 +6,13 @@ class AlwaysTrueValidator(RuleValidator):
         return True
 
 
-class IdentityValidator(RuleValidator):
+class BooleanIdentityValidator(RuleValidator):
     def test(self, value: bool):
         if value is True or value is False:
             return value
 
-        raise ValueError("unknown value: {value}".format(value=value))
+        raise ValueError(f'unknown value: {value}')
 
 
 always_true_validator = AlwaysTrueValidator()
-identity_validator = IdentityValidator()
+identity_validator = BooleanIdentityValidator()
