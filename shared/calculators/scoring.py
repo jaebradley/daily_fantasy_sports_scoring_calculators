@@ -11,6 +11,11 @@ class PointsCalculator:
         raise NotImplementedError()
 
 
+class CaptainPointsCalculator:
+    def calculate_points(self, value, is_captain: bool):
+        raise NotImplementedError()
+
+
 class RuleValidator:
     def test(self, statistics):
         raise NotImplementedError()
@@ -41,6 +46,10 @@ class Rule:
 
         return False
 
+    def __hash__(self) -> int:
+        return hash((self.points_calculator_when_rule_is_true, self.points_calculator_when_rule_is_false,
+                     self.validator, self.value_calculator))
+
 
 class GameTypePointsCalculator(PointsCalculator):
     def __init__(self, rules: Set[Rule]):
@@ -53,3 +62,18 @@ class GameTypePointsCalculator(PointsCalculator):
                 self.rules
             )
         )
+
+
+class CaptainGameTypePointsCalculator(CaptainPointsCalculator):
+    def __init__(self, statistical_points_calculator: GameTypePointsCalculator, points_modifier_when_captain: float,
+                 points_modifier_when_not_captain: float):
+        self.statistical_points_calculator = statistical_points_calculator
+        self.points_modifier_when_captain = points_modifier_when_captain
+        self.points_modifier_when_not_captain = points_modifier_when_not_captain
+
+    def calculate_points(self, value, is_captain: bool):
+        points = self.statistical_points_calculator.calculate_points(value)
+        if is_captain is True:
+            return self.points_modifier_when_captain * points
+
+        return self.points_modifier_when_not_captain * points
