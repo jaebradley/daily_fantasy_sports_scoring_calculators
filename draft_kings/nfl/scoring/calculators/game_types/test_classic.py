@@ -1,5 +1,5 @@
 from unittest import TestCase
-from draft_kings.nfl.scoring.calculators.classic import points_calculator
+from draft_kings.nfl.scoring.calculators.game_types.classic import points_calculator
 from draft_kings.nfl.statistics.models.offensive import OffensiveStatistics, ScoringStatistics, TurnoverStatistics, \
     TouchdownStatistics, YardageStatistics
 

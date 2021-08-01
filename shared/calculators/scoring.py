@@ -6,9 +6,34 @@ class StatisticalValueCalculator:
         raise NotImplementedError()
 
 
-class PointsCalculator:
-    def calculate_points(self, value):
+class ConditionalValueEvaluator:
+    def test(self, value):
         raise NotImplementedError()
+
+
+class PointsCalculator:
+    def calculate_points(self, value) -> float:
+        raise NotImplementedError()
+
+
+class ConditionalPointsCalculator(PointsCalculator):
+    def __init__(self, points_calculator_when_condition_is_true: PointsCalculator,
+                 points_calculator_when_condition_is_false: PointsCalculator,
+                 condition_evaluator: ConditionalValueEvaluator
+                 ):
+        self.points_calculator_when_rule_is_true = points_calculator_when_condition_is_true
+        self.points_calculator_when_rule_is_false = points_calculator_when_condition_is_false
+        self.validator = condition_evaluator
+
+    def calculate_points(self, value) -> float:
+        condition = self.validator.test(value=value)
+        if True is condition:
+            return self.points_calculator_when_rule_is_true.calculate_points(value)
+
+        if False is condition:
+            return self.points_calculator_when_rule_is_false.calculate_points(value)
+
+        raise ValueError(f"Unknown condition: {condition}")
 
 
 class CaptainPointsCalculator:
@@ -16,50 +41,24 @@ class CaptainPointsCalculator:
         raise NotImplementedError()
 
 
-class RuleValidator:
-    def test(self, statistics):
-        raise NotImplementedError()
-
-
-class Rule:
-    def __init__(self, points_calculator_when_rule_is_true: PointsCalculator,
-                 points_calculator_when_rule_is_false: PointsCalculator, validator: RuleValidator,
-                 value_calculator: StatisticalValueCalculator):
-        self.points_calculator_when_rule_is_true = points_calculator_when_rule_is_true
-        self.points_calculator_when_rule_is_false = points_calculator_when_rule_is_false
-        self.validator = validator
+class StatisticalCategoryPointsCalculator:
+    def __init__(self, value_calculator: StatisticalValueCalculator, points_calculator: PointsCalculator):
         self.value_calculator = value_calculator
+        self.points_calculator = points_calculator
 
-    def apply(self, statistics):
-        value = self.value_calculator.calculate_value(statistics)
-
-        if self.validator.test(value):
-            return self.points_calculator_when_rule_is_true.calculate_points(value)
-
-        return self.points_calculator_when_rule_is_false.calculate_points(value)
-
-    def __eq__(self, other):
-        if isinstance(other, Rule):
-            return other.points_calculator_when_rule_is_true == self.points_calculator_when_rule_is_true \
-                   and other.points_calculator_when_rule_is_false == self.points_calculator_when_rule_is_false \
-                   and other.validator == self.validator and other.value_calculator == self.value_calculator
-
-        return False
-
-    def __hash__(self) -> int:
-        return hash((self.points_calculator_when_rule_is_true, self.points_calculator_when_rule_is_false,
-                     self.validator, self.value_calculator))
+    def calculate_points(self, statistics):
+        return self.points_calculator.calculate_points(value=self.value_calculator.calculate_value(statistics))
 
 
 class GameTypePointsCalculator(PointsCalculator):
-    def __init__(self, rules: Set[Rule]):
-        self.rules = rules
+    def __init__(self, calculators: Set[StatisticalCategoryPointsCalculator]):
+        self.calculators = calculators
 
     def calculate_points(self, statistics):
         return sum(
             map(
-                lambda rule: rule.apply(statistics),
-                self.rules
+                lambda calculator: calculator.apply(statistics),
+                self.calculators
             )
         )
 
