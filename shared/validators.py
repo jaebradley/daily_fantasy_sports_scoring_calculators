@@ -1,12 +1,12 @@
-from shared.calculators.scoring import RuleValidator
+from shared.calculators.scoring import ConditionEvaluator
 
 
-class AlwaysTrueValidator(RuleValidator):
+class AlwaysTrueValidator(ConditionEvaluator):
     def test(self, statistics):
         return True
 
 
-class BooleanIdentityValidator(RuleValidator):
+class BooleanIdentityValidator(ConditionEvaluator):
     def test(self, value: bool):
         if value is True or value is False:
             return value

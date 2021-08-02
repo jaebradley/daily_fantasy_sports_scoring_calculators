@@ -1,5 +1,5 @@
-from draft_kings.nba.rules import PointsScoredRule, ThreePointersMadeRule, AssistsRule, BlocksRule, StealsRule, \
-    ReboundsRule, TurnoversRule, DoubleDoubleRule, TripleDoubleRule
+from draft_kings.nba.rules import PointsScoredConditionalPointsCalculator, ThreePointersMadeConditionalPointsCalculator, AssistsConditionalPointsCalculator, BlocksConditionalPointsCalculator, StealsConditionalPointsCalculator, \
+    ReboundsConditionalPointsCalculator, TurnoversConditionalPointsCalculator, DoubleDoubleConditionalPointsCalculator, TripleDoubleConditionalPointsCalculator
 from shared.calculators.scoring import GameTypePointsCalculator
 
 
@@ -7,15 +7,15 @@ class PointsCalculator(GameTypePointsCalculator):
     def __init__(self):
         super().__init__(
             {
-                PointsScoredRule(),
-                ThreePointersMadeRule(),
-                AssistsRule(),
-                BlocksRule(),
-                StealsRule(),
-                ReboundsRule(),
-                TurnoversRule(),
-                DoubleDoubleRule(),
-                TripleDoubleRule()
+                PointsScoredConditionalPointsCalculator(),
+                ThreePointersMadeConditionalPointsCalculator(),
+                AssistsConditionalPointsCalculator(),
+                BlocksConditionalPointsCalculator(),
+                StealsConditionalPointsCalculator(),
+                ReboundsConditionalPointsCalculator(),
+                TurnoversConditionalPointsCalculator(),
+                DoubleDoubleConditionalPointsCalculator(),
+                TripleDoubleConditionalPointsCalculator()
             }
         )
 
