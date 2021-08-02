@@ -1,47 +1,78 @@
-from draft_kings.nfl.scoring.calculators.value_to_points.offensive import passing_touchdowns_points_calculator, \
-    HasReached300PassingYardsCalculator, PassingYardageCalculator, HasReached100YardsCalculator, \
-    non_passing_touchdowns_points_calculator, \
-    NonPassingYardsCalculator as RushingYardsPointsCalculator, non_passing_yards_calculator as \
-    non_passing_yards_points_calculator, turnovers_calculator as turnovers_points_calculator, \
-    two_point_conversions_calculator as two_point_conversions_points_calculator, ReceptionsCalculator as \
-    ReceptionsPointsCalculator
-from draft_kings.nfl.statistics.calculators.values import passing_touchdowns_value_calculator, \
-    at_least_300_yards_passing_value_calculator, passing_yardage_value_calculator, \
-    at_least_100_yards_rushing_calculator, InterceptionsValueCalculator, RushingTouchdownsValueCalculator, \
-    RushingYardageValueCalculator, ReceivingTouchdownsValueCalculator, ReceptionsValueCalculator, \
-    KickoffsReturnTouchdownsValueCalculator, PuntReturnTouchdownsValueCalculator, \
-    FieldGoalReturnTouchdownsValueCalculator, FumblesLostValueCalculator, TwoPointConversionsCaughtValueCalculator, \
-    TwoPointConversionsRushedValueCalculator, TwoPointConversionsThrownValueCalculator, \
-    FumbleRecoveryTouchdownsValueCalculator, ReceivingYardageValueCalculator, at_least_100_yards_receiving_calculator
+from draft_kings.nfl.scoring.calculators.value_to_points.offensive import \
+    PassingTouchdownsCalculator as PassingTouchdownsPointsCalculator, \
+    HasAchievedAtLeast300YardsCalculator as HasAchievedAtLeast300PassingYardsPointsCalculator, \
+    PassingYardageCalculator as PassingYardagePointsCalculator, \
+    HasAchievedAtLeast100YardsCalculator as HasAchievedAtLeast100YardsPointsCalculator, \
+    NonPassingTouchdownsCalculator as NonPassingTouchdownsPointsCalculator, \
+    NonPassingYardsCalculator as NonPassingYardsPointsCalculator, \
+    TurnoversCalculator as TurnoversPointsCalculator, \
+    TwoPointConversionsCalculator as TwoPointConversionsPointsCalculator, \
+    ReceptionsCalculator as ReceptionsPointsCalculator
+from draft_kings.nfl.statistics.calculators.values import PassingTouchdownsCalculator as \
+    PassingTouchdownsValueCalculator, \
+    HasAchievedMinimumYardageRequirementCalculator as HasAchievedMinimumYardageRequirementValueCalculator, \
+    InterceptionsCalculator as InterceptionsValueCalculator, \
+    RushingTouchdownsCalculator as RushingTouchdownsValueCalculator, \
+    RushingYardageCalculator as RushingYardageValueCalculator, \
+    ReceivingTouchdownsCalculator as ReceivingTouchdownsValueCalculator, \
+    ReceptionsCalculator as ReceptionsValueCalculator, \
+    KickoffsReturnTouchdownsCalculator as KickoffsReturnTouchdownsValueCalculator, \
+    PuntReturnTouchdownsCalculator as PuntReturnTouchdownsValueCalculator, \
+    FieldGoalReturnTouchdownsCalculator as FieldGoalReturnTouchdownsValueCalculator, \
+    FumblesLostCalculator as FumblesLostValueCalculator, \
+    TwoPointConversionsCaughtCalculator as TwoPointConversionsCaughtValueCalculator, \
+    TwoPointConversionsRushedCalculator as TwoPointConversionsRushedValueCalculator, \
+    TwoPointConversionsThrownCalculator as TwoPointConversionsThrownValueCalculator, \
+    FumbleRecoveryTouchdownsCalculator as FumbleRecoveryTouchdownsValueCalculator, \
+    ReceivingYardageCalculator as ReceivingYardageValueCalculator, \
+    PassingYardageCalculator as PassingYardageValueCalculator
 from shared.calculators.scoring import StatisticalCategoryPointsCalculator, StatisticalValueCalculator
 
+passing_yardage_value_calculator = PassingYardageValueCalculator()
+receiving_yardage_value_calculator = ReceivingYardageValueCalculator()
+rushing_yardage_value_calculator = RushingYardageValueCalculator()
 
-class PassingTouchdownsPointsCalculator(StatisticalCategoryPointsCalculator):
+non_passing_yards_points_calculator = NonPassingYardsPointsCalculator()
+
+
+class PassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(passing_touchdowns_value_calculator, passing_touchdowns_points_calculator)
+        super().__init__(PassingTouchdownsValueCalculator(), PassingTouchdownsPointsCalculator())
 
 
 class NonPassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self, value_calculator: StatisticalValueCalculator):
-        super().__init__(value_calculator, non_passing_touchdowns_points_calculator)
+        super().__init__(value_calculator, NonPassingTouchdownsPointsCalculator())
 
 
-class HasReached300YardPassingYardageLimitPointsCalculator(StatisticalCategoryPointsCalculator):
+class HasAchievedAtLeast300PassingYardsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
-            at_least_300_yards_passing_value_calculator,
-            HasReached300PassingYardsCalculator()
+            HasAchievedMinimumYardageRequirementValueCalculator(
+                yardage_value_calculator=passing_yardage_value_calculator,
+                minimum_inclusive_required_yardage=300
+            ),
+            HasAchievedAtLeast300PassingYardsPointsCalculator()
         )
 
 
-class PassingYardagePointsCalculator(StatisticalCategoryPointsCalculator):
+class PassingYardageCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(passing_yardage_value_calculator, PassingYardageCalculator())
+        super().__init__(passing_yardage_value_calculator, PassingYardagePointsCalculator())
 
 
 class TurnoversCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self, value_calculator: StatisticalValueCalculator):
-        super().__init__(value_calculator, turnovers_points_calculator)
+        super().__init__(value_calculator, TurnoversPointsCalculator())
+
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, TurnoversCalculator):
+            return o.value_calculator == self.value_calculator and super().__eq__(o)
+
+        return False
+
+    def __hash__(self):
+        return hash((self.value_calculator, super().__hash__()))
 
 
 class InterceptionsCalculator(TurnoversCalculator):
@@ -56,12 +87,18 @@ class RushingTouchdownsCalculator(NonPassingTouchdownsCalculator):
 
 class RushingYardageCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(RushingYardageValueCalculator(), RushingYardsPointsCalculator())
+        super().__init__(rushing_yardage_value_calculator, non_passing_yards_points_calculator)
 
 
 class HasReached100YardsRushingPointsLimit(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(at_least_100_yards_rushing_calculator, HasReached100YardsCalculator())
+        super().__init__(
+            HasAchievedMinimumYardageRequirementValueCalculator(
+                yardage_value_calculator=rushing_yardage_value_calculator,
+                minimum_inclusive_required_yardage=100
+            ),
+            HasAchievedAtLeast100YardsPointsCalculator()
+        )
 
 
 class ReceivingTouchdownsCalculator(NonPassingTouchdownsCalculator):
@@ -71,13 +108,18 @@ class ReceivingTouchdownsCalculator(NonPassingTouchdownsCalculator):
 
 class ReceivingYardsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(ReceivingYardageValueCalculator(), non_passing_yards_points_calculator)
+        super().__init__(receiving_yardage_value_calculator, non_passing_yards_points_calculator)
 
 
 class HasReached100YardsReceivingCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(value_calculator=at_least_100_yards_receiving_calculator,
-                         points_calculator=HasReached100YardsCalculator())
+        super().__init__(
+            value_calculator=HasAchievedMinimumYardageRequirementValueCalculator(
+                yardage_value_calculator=receiving_yardage_value_calculator,
+                minimum_inclusive_required_yardage=100
+            ),
+            points_calculator=HasAchievedAtLeast100YardsPointsCalculator()
+        )
 
 
 class ReceptionsCalculator(StatisticalCategoryPointsCalculator):
@@ -107,10 +149,19 @@ class FumblesLostCalculator(TurnoversCalculator):
 
 class TwoPointConversionCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self, value_calculator: StatisticalValueCalculator):
-        super().__init__(value_calculator, two_point_conversions_points_calculator)
+        super().__init__(value_calculator, TwoPointConversionsPointsCalculator())
+
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, TwoPointConversionCalculator):
+            return o.value_calculator == self.value_calculator and super().__eq__(o)
+
+        return False
+
+    def __hash__(self):
+        return hash((self.value_calculator, super().__hash__()))
 
 
-class TwoPointConversionsPassedCalculator(TwoPointConversionCalculator):
+class TwoPointConversionsThrownCalculator(TwoPointConversionCalculator):
     def __init__(self):
         super().__init__(TwoPointConversionsThrownValueCalculator())
 

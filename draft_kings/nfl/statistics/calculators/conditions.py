@@ -1,23 +1,10 @@
-from shared.calculators.scoring import ConditionalValueEvaluator
+from shared.calculators.scoring import ConditionEvaluator
 
 
-class HasAchievedLimitEvaluator(ConditionalValueEvaluator):
-    def __init__(self, inclusive_limit: int) -> None:
+class HasAchievedMinimumValueRequirement(ConditionEvaluator):
+    def __init__(self, minimum_inclusive_required_value: int) -> None:
         super().__init__()
-        self.inclusive_limit = inclusive_limit
+        self.minimum_inclusive_required_value = minimum_inclusive_required_value
 
-    def test(self, value):
-        return self.inclusive_limit <= value
-
-
-class HasReached300PassingYardsConditionEvaluator(ConditionalValueEvaluator):
-    def test(self, value):
-        return 300 <= value
-
-
-class HasReached100YardsEvaluator(HasAchievedLimitEvaluator):
-    def __init__(self) -> None:
-        super().__init__(100)
-
-
-has_reached_100_yards_condition_evaluator = HasReached100YardsEvaluator()
+    def test(self, value: int):
+        return self.minimum_inclusive_required_value <= value

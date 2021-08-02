@@ -2,107 +2,103 @@ from draft_kings.nfl.statistics.models.offensive import OffensiveStatistics
 from shared.calculators.scoring import StatisticalValueCalculator
 
 
-class PassingTouchdownsValueCalculator(StatisticalValueCalculator):
+class PassingTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.passing
+        return statistics.scoring.touchdowns.passing
 
 
-class PassingYardageValueCalculator(StatisticalValueCalculator):
+class PassingYardageCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.yards.passing
 
 
-class YardageLimitReachedCalculator(StatisticalValueCalculator):
-    def __init__(self, yardage_value_calculator: StatisticalValueCalculator, inclusive_yardage_limit: int) -> None:
+class HasAchievedMinimumYardageRequirementCalculator(StatisticalValueCalculator):
+    def __init__(self, yardage_value_calculator: StatisticalValueCalculator,
+                 minimum_inclusive_required_yardage: int) -> None:
         super().__init__()
         self.yardage_value_calculator = yardage_value_calculator
-        self.inclusive_yardage_limit = inclusive_yardage_limit
+        self.minimum_inclusive_required_yardage = minimum_inclusive_required_yardage
 
     def calculate_value(self, statistics: OffensiveStatistics):
-        return self.inclusive_yardage_limit >= self.yardage_value_calculator.calculate_value(statistics)
+        return self.minimum_inclusive_required_yardage <= \
+               self.yardage_value_calculator.calculate_value(statistics=statistics)
+
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, HasAchievedMinimumYardageRequirementCalculator):
+            return self.yardage_value_calculator == o.yardage_value_calculator and \
+                   o.minimum_inclusive_required_yardage == self.minimum_inclusive_required_yardage and super().__eq__(o)
+
+        return False
+
+    def __hash__(self) -> int:
+        return hash((self.yardage_value_calculator, self.minimum_inclusive_required_yardage, super().__hash__()))
 
 
-class InterceptionsValueCalculator(StatisticalValueCalculator):
+class InterceptionsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.turnovers.interceptions
 
 
-class RushingTouchdownsValueCalculator(StatisticalValueCalculator):
+class RushingTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.rushing
+        return statistics.scoring.touchdowns.rushing
 
 
-class RushingYardageValueCalculator(StatisticalValueCalculator):
+class RushingYardageCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.yards.rushing
 
 
-class ReceivingTouchdownsValueCalculator(StatisticalValueCalculator):
+class ReceivingTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.receiving
+        return statistics.scoring.touchdowns.receiving
 
 
-class ReceptionsValueCalculator(StatisticalValueCalculator):
+class ReceptionsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.receptions
 
 
-class ReceivingYardageValueCalculator(StatisticalValueCalculator):
+class ReceivingYardageCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.yards.receiving
 
 
-class KickoffsReturnTouchdownsValueCalculator(StatisticalValueCalculator):
+class KickoffsReturnTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.kick_returns.kickoffs
+        return statistics.scoring.touchdowns.kick_returns.kickoffs
 
 
-class PuntReturnTouchdownsValueCalculator(StatisticalValueCalculator):
+class PuntReturnTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.kick_returns.punts
+        return statistics.scoring.touchdowns.kick_returns.punts
 
 
-class FieldGoalReturnTouchdownsValueCalculator(StatisticalValueCalculator):
+class FieldGoalReturnTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
-        return statistics.scoring.touchdown.kick_returns.field_goals
+        return statistics.scoring.touchdowns.kick_returns.field_goals
 
 
-class FumblesLostValueCalculator(StatisticalValueCalculator):
+class FumblesLostCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.turnovers.fumbles_lost
 
 
-class TwoPointConversionsCaughtValueCalculator(StatisticalValueCalculator):
+class TwoPointConversionsCaughtCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.scoring.conversions.two_point.caught
 
 
-class TwoPointConversionsRushedValueCalculator(StatisticalValueCalculator):
+class TwoPointConversionsRushedCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.scoring.conversions.two_point.rushed
 
 
-class TwoPointConversionsThrownValueCalculator(StatisticalValueCalculator):
+class TwoPointConversionsThrownCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.scoring.conversions.two_point.thrown
 
 
-class FumbleRecoveryTouchdownsValueCalculator(StatisticalValueCalculator):
+class FumbleRecoveryTouchdownsCalculator(StatisticalValueCalculator):
     def calculate_value(self, statistics: OffensiveStatistics):
         return statistics.scoring.touchdowns.fumble_recoveries
-
-
-passing_touchdowns_value_calculator = PassingTouchdownsValueCalculator()
-passing_yardage_value_calculator = PassingYardageValueCalculator()
-at_least_300_yards_passing_value_calculator = YardageLimitReachedCalculator(
-    yardage_value_calculator=passing_yardage_value_calculator,
-    inclusive_yardage_limit=300
-)
-at_least_100_yards_rushing_calculator = YardageLimitReachedCalculator(
-    yardage_value_calculator=RushingYardageValueCalculator(),
-    inclusive_yardage_limit=100
-)
-at_least_100_yards_receiving_calculator = YardageLimitReachedCalculator(
-    yardage_value_calculator=ReceivingYardageValueCalculator(),
-    inclusive_yardage_limit=100
-)

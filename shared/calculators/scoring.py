@@ -6,8 +6,8 @@ class StatisticalValueCalculator:
         raise NotImplementedError()
 
 
-class ConditionalValueEvaluator:
-    def test(self, value):
+class ConditionEvaluator:
+    def test(self, value) -> bool:
         raise NotImplementedError()
 
 
@@ -17,23 +17,23 @@ class PointsCalculator:
 
 
 class ConditionalPointsCalculator(PointsCalculator):
-    def __init__(self, points_calculator_when_condition_is_true: PointsCalculator,
-                 points_calculator_when_condition_is_false: PointsCalculator,
-                 condition_evaluator: ConditionalValueEvaluator
+    def __init__(self, points_calculator_when_condition_is_met: PointsCalculator,
+                 points_calculator_when_condition_is_not_met: PointsCalculator,
+                 condition_evaluator: ConditionEvaluator
                  ):
-        self.points_calculator_when_rule_is_true = points_calculator_when_condition_is_true
-        self.points_calculator_when_rule_is_false = points_calculator_when_condition_is_false
-        self.validator = condition_evaluator
+        self.points_calculator_when_condition_is_met = points_calculator_when_condition_is_met
+        self.points_calculator_when_condition_is_not_met = points_calculator_when_condition_is_not_met
+        self.condition_evaluator = condition_evaluator
 
     def calculate_points(self, value) -> float:
-        condition = self.validator.test(value=value)
-        if True is condition:
-            return self.points_calculator_when_rule_is_true.calculate_points(value)
+        has_condition_been_met = self.condition_evaluator.test(value=value)
+        if True is has_condition_been_met:
+            return self.points_calculator_when_condition_is_met.calculate_points(value)
 
-        if False is condition:
-            return self.points_calculator_when_rule_is_false.calculate_points(value)
+        if False is has_condition_been_met:
+            return self.points_calculator_when_condition_is_not_met.calculate_points(value)
 
-        raise ValueError(f"Unknown condition: {condition}")
+        raise ValueError(f"Unknown has_condition_been_met: {has_condition_been_met}")
 
 
 class CaptainPointsCalculator:
@@ -49,6 +49,15 @@ class StatisticalCategoryPointsCalculator:
     def calculate_points(self, statistics):
         return self.points_calculator.calculate_points(value=self.value_calculator.calculate_value(statistics))
 
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, StatisticalCategoryPointsCalculator):
+            return self.value_calculator == o.value_calculator and self.points_calculator == o.points_calculator
+
+        return False
+
+    def __hash__(self):
+        return hash((self.value_calculator, self.points_calculator))
+
 
 class GameTypePointsCalculator(PointsCalculator):
     def __init__(self, calculators: Set[StatisticalCategoryPointsCalculator]):
@@ -57,7 +66,7 @@ class GameTypePointsCalculator(PointsCalculator):
     def calculate_points(self, statistics):
         return sum(
             map(
-                lambda calculator: calculator.apply(statistics),
+                lambda calculator: calculator.calculate_points(statistics),
                 self.calculators
             )
         )
@@ -71,7 +80,7 @@ class CaptainGameTypePointsCalculator(CaptainPointsCalculator):
         self.points_modifier_when_not_captain = points_modifier_when_not_captain
 
     def calculate_points(self, value, is_captain: bool):
-        points = self.statistical_points_calculator.calculate_points(value)
+        points = self.statistical_points_calculator.calculate_points(statistics=value)
         if is_captain is True:
             return self.points_modifier_when_captain * points
 

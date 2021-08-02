@@ -1,10 +1,10 @@
-from draft_kings.nfl.scoring.calculators.statistical_value_to_points.offensive import PassingTouchdownsPointsCalculator, \
-    HasReached300YardPassingYardageLimitPointsCalculator, PassingYardagePointsCalculator, \
+from draft_kings.nfl.scoring.calculators.statistical_value_to_points.offensive import PassingTouchdownsCalculator, \
+    HasAchievedAtLeast300PassingYardsCalculator, PassingYardageCalculator, \
     HasReached100YardsRushingPointsLimit, InterceptionsCalculator, RushingTouchdownsCalculator, \
     RushingYardageCalculator, ReceivingTouchdownsCalculator, ReceivingYardsCalculator, \
     HasReached100YardsReceivingCalculator, ReceptionsCalculator, PuntReturnTouchdownsCalculator, \
     KickReturnTouchdownsCalculator, FieldGoalReturnTouchdownsCalculator, FumblesLostCalculator, \
-    TwoPointConversionsPassedCalculator, TwoPointConversionsCaughtCalculator, TwoPointConversionsRushedCalculator, \
+    TwoPointConversionsThrownCalculator, TwoPointConversionsCaughtCalculator, TwoPointConversionsRushedCalculator, \
     FumbleRecoveryTouchdownsCalculator
 from shared.calculators.scoring import GameTypePointsCalculator
 
@@ -12,9 +12,9 @@ from shared.calculators.scoring import GameTypePointsCalculator
 class PointsCalculator(GameTypePointsCalculator):
     def __init__(self):
         super().__init__({
-            PassingTouchdownsPointsCalculator(),
-            PassingYardagePointsCalculator(),
-            HasReached300YardPassingYardageLimitPointsCalculator(),
+            PassingTouchdownsCalculator(),
+            PassingYardageCalculator(),
+            HasAchievedAtLeast300PassingYardsCalculator(),
             InterceptionsCalculator(),
             HasReached100YardsRushingPointsLimit(),
             RushingTouchdownsCalculator(),
@@ -27,7 +27,7 @@ class PointsCalculator(GameTypePointsCalculator):
             KickReturnTouchdownsCalculator(),
             FieldGoalReturnTouchdownsCalculator(),
             FumblesLostCalculator(),
-            TwoPointConversionsPassedCalculator(),
+            TwoPointConversionsThrownCalculator(),
             TwoPointConversionsCaughtCalculator(),
             TwoPointConversionsRushedCalculator(),
             FumbleRecoveryTouchdownsCalculator()

@@ -1,7 +1,9 @@
 from unittest import TestCase
+
 from draft_kings.nfl.scoring.calculators.game_types.classic import points_calculator
 from draft_kings.nfl.statistics.models.offensive import OffensiveStatistics, ScoringStatistics, TurnoverStatistics, \
-    TouchdownStatistics, YardageStatistics
+    TouchdownStatistics, YardageStatistics, KickReturnTouchdownStatistics, ConversionStatistics, \
+    TwoPointConversionStatistics
 
 
 class TestPointsCalculator(TestCase):
@@ -9,7 +11,7 @@ class TestPointsCalculator(TestCase):
         self.assertEqual(
             4,
             points_calculator.calculate_points(
-                OffensiveStatistics(
+                statistics=OffensiveStatistics(
                     yards=YardageStatistics(
                         passing=0,
                         rushing=0,
@@ -20,10 +22,20 @@ class TestPointsCalculator(TestCase):
                             passing=1,
                             rushing=0,
                             receiving=0,
-                            kick_returns=0,
+                            kick_returns=KickReturnTouchdownStatistics(
+                                kickoffs=0,
+                                punts=0,
+                                field_goals=0
+                            ),
                             fumble_recoveries=0
                         ),
-                        two_point_conversions=0
+                        conversions=ConversionStatistics(
+                            two_point=TwoPointConversionStatistics(
+                                caught=0,
+                                thrown=0,
+                                rushed=0
+                            )
+                        )
                     ),
                     turnovers=TurnoverStatistics(
                         interceptions=0,

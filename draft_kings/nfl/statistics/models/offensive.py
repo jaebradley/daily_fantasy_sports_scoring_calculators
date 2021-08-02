@@ -30,7 +30,7 @@ class TwoPointConversionStatistics:
 
 
 class ConversionStatistics:
-    def __int__(self, two_point: TwoPointConversionStatistics):
+    def __init__(self, two_point: TwoPointConversionStatistics):
         self.two_point = two_point
 
 

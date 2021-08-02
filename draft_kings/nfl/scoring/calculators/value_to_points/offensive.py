@@ -1,6 +1,5 @@
 from draft_kings.nba.calculators.points import zero_points_calculator
-from draft_kings.nfl.statistics.calculators.conditions import HasAchievedLimitEvaluator, \
-    has_reached_100_yards_condition_evaluator
+from draft_kings.nfl.statistics.calculators.conditions import HasAchievedMinimumValueRequirement
 from shared.calculators.scoring import PointsCalculator, ConditionalPointsCalculator
 
 
@@ -14,15 +13,23 @@ class PassingYardageCalculator(PointsCalculator):
         return 0.04 * value
 
 
-class YardageLimitCalculator(PointsCalculator):
+class YardageLimitAchievedCalculator(PointsCalculator):
     def calculate_points(self, value) -> float:
         return 3
 
 
-class HasReached300PassingYardsCalculator(ConditionalPointsCalculator):
+class HasAchievedMinimumYardageRequirementCalculator(ConditionalPointsCalculator):
+    def __init__(self, minimum_inclusive_required_yardage: int):
+        super().__init__(
+            YardageLimitAchievedCalculator(),
+            zero_points_calculator,
+            HasAchievedMinimumValueRequirement(minimum_inclusive_required_value=minimum_inclusive_required_yardage)
+        )
+
+
+class HasAchievedAtLeast300YardsCalculator(HasAchievedMinimumYardageRequirementCalculator):
     def __init__(self):
-        super().__init__(YardageLimitCalculator(), zero_points_calculator,
-                         HasAchievedLimitEvaluator(inclusive_limit=300))
+        super().__init__(300)
 
 
 class TurnoversCalculator(PointsCalculator):
@@ -40,10 +47,9 @@ class NonPassingYardsCalculator(PointsCalculator):
         return 0.1 * value
 
 
-class HasReached100YardsCalculator(ConditionalPointsCalculator):
+class HasAchievedAtLeast100YardsCalculator(HasAchievedMinimumYardageRequirementCalculator):
     def __init__(self):
-        super().__init__(YardageLimitCalculator(), zero_points_calculator,
-                         has_reached_100_yards_condition_evaluator)
+        super().__init__(100)
 
 
 class ReceptionsCalculator(PointsCalculator):
@@ -54,11 +60,3 @@ class ReceptionsCalculator(PointsCalculator):
 class TwoPointConversionsCalculator(PointsCalculator):
     def calculate_points(self, value) -> float:
         return 2 * value
-
-
-passing_touchdowns_points_calculator = PassingTouchdownsCalculator()
-non_passing_touchdowns_points_calculator = NonPassingTouchdownsCalculator()
-has_reached_100_yards_calculator = HasReached100YardsCalculator()
-non_passing_yards_calculator = NonPassingYardsCalculator()
-turnovers_calculator = TurnoversCalculator()
-two_point_conversions_calculator = TwoPointConversionsCalculator()
