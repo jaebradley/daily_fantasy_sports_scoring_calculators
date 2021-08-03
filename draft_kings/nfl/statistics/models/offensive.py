@@ -7,6 +7,9 @@ class YardageStatistics:
 
 class KickReturnTouchdownStatistics:
     def __init__(self, punts: int, kickoffs: int, field_goals: int):
+        if 0 > punts or 0 > kickoffs or 0 > field_goals:
+            raise ValueError("touchdowns cannot be negative")
+
         self.punts = punts
         self.kickoffs = kickoffs
         self.field_goals = field_goals
@@ -15,6 +18,9 @@ class KickReturnTouchdownStatistics:
 class TouchdownStatistics:
     def __init__(self, passing: int, rushing: int, receiving: int, kick_returns: KickReturnTouchdownStatistics,
                  fumble_recoveries: int):
+        if 0 > passing or 0 > rushing or 0 > receiving or 0 > fumble_recoveries:
+            raise ValueError("touchdowns cannot be negative")
+
         self.passing = passing
         self.rushing = rushing
         self.receiving = receiving
@@ -24,6 +30,9 @@ class TouchdownStatistics:
 
 class TwoPointConversionStatistics:
     def __init__(self, thrown: int, rushed: int, caught: int):
+        if 0 > thrown or 0 > rushed or 0 > caught:
+            raise ValueError("conversions cannot be negative")
+
         self.thrown = thrown
         self.rushed = rushed
         self.caught = caught
@@ -42,6 +51,9 @@ class ScoringStatistics:
 
 class TurnoverStatistics:
     def __init__(self, interceptions: int, fumbles_lost: int):
+        if 0 > interceptions or 0 > fumbles_lost:
+            raise ValueError("turnovers cannot be negative")
+
         self.interceptions = interceptions
         self.fumbles_lost = fumbles_lost
 
@@ -49,6 +61,9 @@ class TurnoverStatistics:
 class OffensiveStatistics:
     def __init__(self, yards: YardageStatistics, scoring: ScoringStatistics, turnovers: TurnoverStatistics,
                  receptions: int):
+        if 0 > receptions:
+            raise ValueError("receptions cannot be negative")
+
         self.yards = yards
         self.scoring = scoring
         self.turnovers = turnovers
