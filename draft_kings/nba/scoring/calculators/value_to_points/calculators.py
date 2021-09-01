@@ -1,11 +1,6 @@
 from shared.calculators.scoring import PointsCalculator
 
 
-class ZeroPointsCalculator(PointsCalculator):
-    def calculate_points(self, value):
-        return 0
-
-
 class PointsScoredPointsCalculator(PointsCalculator):
     def calculate_points(self, value):
         return value
@@ -60,4 +55,3 @@ turnovers_points_calculator = TurnoverPointsCalculator()
 rebounds_points_calculator = ReboundsPointsCalculator()
 double_double_points_calculator = DoubleDoublePointsCalculator()
 triple_double_points_calculator = TripleDoublePointsCalculator()
-zero_points_calculator = ZeroPointsCalculator()

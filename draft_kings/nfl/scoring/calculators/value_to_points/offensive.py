@@ -1,6 +1,6 @@
-from draft_kings.nba.calculators.points import zero_points_calculator
 from draft_kings.nfl.statistics.calculators.conditions import HasAchievedMinimumValueRequirement
 from shared.calculators.scoring import PointsCalculator, ConditionalPointsCalculator
+from shared.calculators.scoring import zero_points_calculator
 
 
 class PassingTouchdownsCalculator(PointsCalculator):

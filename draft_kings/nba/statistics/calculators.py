@@ -1,4 +1,5 @@
-from draft_kings.nba.statistics import Statistics
+from draft_kings.nba.statistics.models import Statistics
+from shared.calculators.scoring import ConditionEvaluator
 from shared.calculators.scoring import StatisticalValueCalculator
 
 
@@ -37,7 +38,7 @@ class TurnoversValueCalculator(StatisticalValueCalculator):
         return statistics.turnovers
 
 
-class DoubleFigureValueCalculator(StatisticalValueCalculator):
+class DoubleFigureValueCalculator(ConditionEvaluator):
     def __init__(self, points_scored_value_calculator: StatisticalValueCalculator,
                  assists_value_calculator: StatisticalValueCalculator,
                  rebounds_value_calculator: StatisticalValueCalculator,
@@ -51,9 +52,9 @@ class DoubleFigureValueCalculator(StatisticalValueCalculator):
         self.calculators = {points_scored_value_calculator, assists_value_calculator, rebounds_value_calculator,
                             steals_value_calculator, blocks_value_calculator}
 
-    def calculate_value(self, statistics):
+    def test(self, value):
         return self.minimum_values_that_must_be_at_least_ten <= sum(
-            map(lambda calculator: 10 <= calculator.calculate_value(statistics), self.calculators))
+            map(lambda calculator: 10 <= calculator.calculate_value(value), self.calculators))
 
 
 points_scored_value_calculator = PointsScoredValueCalculator()

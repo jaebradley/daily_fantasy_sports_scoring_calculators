@@ -1,4 +1,4 @@
-from draft_kings.nba.calculators.scoring.classic import points_calculator as classic_points_calculator
+from draft_kings.nba.scoring.calculators.game_types.classic import points_calculator as classic_points_calculator
 from shared.calculators.scoring import CaptainGameTypePointsCalculator
 
 
