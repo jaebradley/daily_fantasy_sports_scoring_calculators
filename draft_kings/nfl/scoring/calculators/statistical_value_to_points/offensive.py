@@ -8,7 +8,7 @@ from draft_kings.nfl.scoring.calculators.value_to_points.offensive import \
     TurnoversCalculator as TurnoversPointsCalculator, \
     TwoPointConversionsCalculator as TwoPointConversionsPointsCalculator, \
     ReceptionsCalculator as ReceptionsPointsCalculator
-from draft_kings.nfl.statistics.calculators.values import PassingTouchdownsCalculator as \
+from draft_kings.nfl.statistics.calculators.offensive import PassingTouchdownsCalculator as \
     PassingTouchdownsValueCalculator, \
     HasAchievedMinimumYardageRequirementCalculator as HasAchievedMinimumYardageRequirementValueCalculator, \
     InterceptionsCalculator as InterceptionsValueCalculator, \
