@@ -85,3 +85,11 @@ class CaptainGameTypePointsCalculator(CaptainPointsCalculator):
             return self.points_modifier_when_captain * points
 
         return self.points_modifier_when_not_captain * points
+
+
+class ZeroPointsCalculator(PointsCalculator):
+    def calculate_points(self, value):
+        return 0
+
+
+zero_points_calculator = ZeroPointsCalculator()
