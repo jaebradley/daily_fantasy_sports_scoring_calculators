@@ -18,16 +18,18 @@ class YardageLimitAchievedCalculator(PointsCalculator):
         return 3
 
 
-class HasAchievedMinimumYardageRequirementCalculator(ConditionalPointsCalculator):
+class HasAchievedMinimumYardageRequirementCalculator(
+        ConditionalPointsCalculator):
     def __init__(self, minimum_inclusive_required_yardage: int):
         super().__init__(
             YardageLimitAchievedCalculator(),
             zero_points_calculator,
-            HasAchievedMinimumValueRequirement(minimum_inclusive_required_value=minimum_inclusive_required_yardage)
-        )
+            HasAchievedMinimumValueRequirement(
+                minimum_inclusive_required_value=minimum_inclusive_required_yardage))
 
 
-class HasAchievedAtLeast300YardsCalculator(HasAchievedMinimumYardageRequirementCalculator):
+class HasAchievedAtLeast300YardsCalculator(
+        HasAchievedMinimumYardageRequirementCalculator):
     def __init__(self):
         super().__init__(300)
 
@@ -47,7 +49,8 @@ class NonPassingYardsCalculator(PointsCalculator):
         return 0.1 * value
 
 
-class HasAchievedAtLeast100YardsCalculator(HasAchievedMinimumYardageRequirementCalculator):
+class HasAchievedAtLeast100YardsCalculator(
+        HasAchievedMinimumYardageRequirementCalculator):
     def __init__(self):
         super().__init__(100)
 

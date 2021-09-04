@@ -1,12 +1,12 @@
-from draft_kings.nba.statistics import points_scored_value_calculator, \
-    three_pointers_made_value_calculator, \
-    assists_value_calculator, blocks_value_calculator, steals_value_calculator, rebounds_value_calculator, \
-    turnovers_value_calculator, double_double_value_calculator, triple_double_value_calculator
 from draft_kings.nba.scoring.calculators.value_to_points.calculators import points_scored_points_calculator, \
     three_pointers_made_points_calculator, assists_points_calculator, blocks_points_calculator, \
     steals_points_calculator, \
     rebounds_points_calculator, turnovers_points_calculator, double_double_points_calculator, \
     triple_double_points_calculator
+from draft_kings.nba.statistics.calculators import points_scored_value_calculator, \
+    three_pointers_made_value_calculator, \
+    assists_value_calculator, blocks_value_calculator, steals_value_calculator, rebounds_value_calculator, \
+    turnovers_value_calculator, double_double_value_calculator, triple_double_value_calculator
 from shared.calculators.scoring import StatisticalCategoryPointsCalculator, ConditionalPointsCalculator, \
     zero_points_calculator
 
@@ -18,7 +18,9 @@ class PointsScoredCalculator(StatisticalCategoryPointsCalculator):
 
 class ThreePointersMadeCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(three_pointers_made_value_calculator, three_pointers_made_points_calculator)
+        super().__init__(
+            three_pointers_made_value_calculator,
+            three_pointers_made_points_calculator)
 
 
 class StealsCalculator(StatisticalCategoryPointsCalculator):
@@ -48,11 +50,15 @@ class BlocksCalculator(StatisticalCategoryPointsCalculator):
 
 class DoubleDoubleCalculator(ConditionalPointsCalculator):
     def __init__(self):
-        super().__init__(double_double_points_calculator, zero_points_calculator,
-                         double_double_value_calculator)
+        super().__init__(
+            double_double_points_calculator,
+            zero_points_calculator,
+            double_double_value_calculator)
 
 
 class TripleDoubleCalculator(ConditionalPointsCalculator):
     def __init__(self):
-        super().__init__(triple_double_points_calculator, zero_points_calculator,
-                         triple_double_value_calculator)
+        super().__init__(
+            triple_double_points_calculator,
+            zero_points_calculator,
+            triple_double_value_calculator)

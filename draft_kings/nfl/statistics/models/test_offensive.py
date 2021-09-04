@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from draft_kings.nfl.statistics.models.offensive import KickReturnTouchdownStatistics, TouchdownStatistics, \
-TwoPointConversionStatistics, TurnoverStatistics, OffensiveStatistics, YardageStatistics, ScoringStatistics, ConversionStatistics
+    TwoPointConversionStatistics, TurnoverStatistics, OffensiveStatistics, YardageStatistics, ScoringStatistics, ConversionStatistics
 
 
 class TestKickReturnTouchdownStatistics(TestCase):
@@ -33,13 +33,15 @@ class TestKickReturnTouchdownStatistics(TestCase):
         for punts in range(max_value):
             for kickoffs in range(max_value):
                 for field_goals in range(max_value):
-                    stats = KickReturnTouchdownStatistics(punts=punts, kickoffs=kickoffs, field_goals=field_goals)
+                    stats = KickReturnTouchdownStatistics(
+                        punts=punts, kickoffs=kickoffs, field_goals=field_goals)
                     self.assertEqual(punts, stats.punts)
                     self.assertEqual(kickoffs, stats.kickoffs)
                     self.assertEqual(field_goals, stats.field_goals)
 
     def test_invalid_touchdown_statistics(self):
-        kick_return_statistics = KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0)
+        kick_return_statistics = KickReturnTouchdownStatistics(
+            punts=0, kickoffs=0, field_goals=0)
 
         with self.assertRaises(ValueError):
             TouchdownStatistics(
@@ -78,7 +80,8 @@ class TestKickReturnTouchdownStatistics(TestCase):
             )
 
     def test_valid_touchdown_statistics(self):
-        kick_return_statistics = KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0)
+        kick_return_statistics = KickReturnTouchdownStatistics(
+            punts=0, kickoffs=0, field_goals=0)
         max_value = 2
 
         for passing in range(max_value):
@@ -95,7 +98,8 @@ class TestKickReturnTouchdownStatistics(TestCase):
                         self.assertEqual(passing, stats.passing)
                         self.assertEqual(rushing, stats.rushing)
                         self.assertEqual(receiving, stats.receiving)
-                        self.assertEqual(fumble_recoveries, stats.fumble_recoveries)
+                        self.assertEqual(
+                            fumble_recoveries, stats.fumble_recoveries)
 
     def test_invalid_two_point_conversion_statistics(self):
         with self.assertRaises(ValueError):
@@ -147,7 +151,8 @@ class TestKickReturnTouchdownStatistics(TestCase):
 
         for interceptions in range(max_value):
             for fumbles_lost in range(max_value):
-                statistics = TurnoverStatistics(interceptions=interceptions, fumbles_lost=fumbles_lost)
+                statistics = TurnoverStatistics(
+                    interceptions=interceptions, fumbles_lost=fumbles_lost)
 
                 self.assertEqual(interceptions, statistics.interceptions)
                 self.assertEqual(fumbles_lost, statistics.fumbles_lost)
@@ -186,4 +191,3 @@ class TestKickReturnTouchdownStatistics(TestCase):
                 ),
                 receptions=-1
             )
-

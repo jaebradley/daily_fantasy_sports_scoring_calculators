@@ -37,7 +37,9 @@ non_passing_yards_points_calculator = NonPassingYardsPointsCalculator()
 
 class PassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(PassingTouchdownsValueCalculator(), PassingTouchdownsPointsCalculator())
+        super().__init__(
+            PassingTouchdownsValueCalculator(),
+            PassingTouchdownsPointsCalculator())
 
 
 class NonPassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
@@ -45,7 +47,8 @@ class NonPassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
         super().__init__(value_calculator, NonPassingTouchdownsPointsCalculator())
 
 
-class HasAchievedAtLeast300PassingYardsCalculator(StatisticalCategoryPointsCalculator):
+class HasAchievedAtLeast300PassingYardsCalculator(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             HasAchievedMinimumYardageRequirementValueCalculator(
@@ -58,7 +61,9 @@ class HasAchievedAtLeast300PassingYardsCalculator(StatisticalCategoryPointsCalcu
 
 class PassingYardageCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(passing_yardage_value_calculator, PassingYardagePointsCalculator())
+        super().__init__(
+            passing_yardage_value_calculator,
+            PassingYardagePointsCalculator())
 
 
 class TurnoversCalculator(StatisticalCategoryPointsCalculator):
@@ -87,10 +92,13 @@ class RushingTouchdownsCalculator(NonPassingTouchdownsCalculator):
 
 class RushingYardageCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(rushing_yardage_value_calculator, non_passing_yards_points_calculator)
+        super().__init__(
+            rushing_yardage_value_calculator,
+            non_passing_yards_points_calculator)
 
 
-class HasReached100YardsRushingPointsLimit(StatisticalCategoryPointsCalculator):
+class HasReached100YardsRushingPointsLimit(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             HasAchievedMinimumYardageRequirementValueCalculator(
@@ -108,18 +116,19 @@ class ReceivingTouchdownsCalculator(NonPassingTouchdownsCalculator):
 
 class ReceivingYardsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(receiving_yardage_value_calculator, non_passing_yards_points_calculator)
+        super().__init__(
+            receiving_yardage_value_calculator,
+            non_passing_yards_points_calculator)
 
 
-class HasReached100YardsReceivingCalculator(StatisticalCategoryPointsCalculator):
+class HasReached100YardsReceivingCalculator(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             value_calculator=HasAchievedMinimumYardageRequirementValueCalculator(
                 yardage_value_calculator=receiving_yardage_value_calculator,
-                minimum_inclusive_required_yardage=100
-            ),
-            points_calculator=HasAchievedAtLeast100YardsPointsCalculator()
-        )
+                minimum_inclusive_required_yardage=100),
+            points_calculator=HasAchievedAtLeast100YardsPointsCalculator())
 
 
 class ReceptionsCalculator(StatisticalCategoryPointsCalculator):

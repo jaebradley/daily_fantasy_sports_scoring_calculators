@@ -3,12 +3,12 @@ from shared.calculators.scoring import PointsCalculator
 
 points_by_points_allowed = {
     PointsAllowed._0: 10,
-    PointsAllowed._1_to_6: 7,
-    PointsAllowed._7_to_13: 4,
-    PointsAllowed._14_to_20: 1,
-    PointsAllowed._21_to_27: 0,
-    PointsAllowed._28_to_24: -1,
-    PointsAllowed._35_or_more: -4
+    PointsAllowed._1_TO_6: 7,
+    PointsAllowed._7_TO_13: 4,
+    PointsAllowed._14_TO_20: 1,
+    PointsAllowed._21_TO_27: 0,
+    PointsAllowed._28_TO_24: -1,
+    PointsAllowed._35_OR_MORE: -4
 }
 
 

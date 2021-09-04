@@ -1,9 +1,18 @@
 class Statistics:
-    def __init__(self, points_scored: int, three_pointers_made: int, assists: int, rebounds: int, steals: int,
-                 blocks: int, turnovers: int):
+    def __init__(
+            self,
+            points_scored: int,
+            three_pointers_made: int,
+            assists: int,
+            rebounds: int,
+            steals: int,
+            blocks: int,
+            turnovers: int):
         if points_scored < 3 * three_pointers_made:
-            raise ValueError("Points scored is contradicted by three-pointers made")
+            raise ValueError(
+                "Points scored is contradicted by three-pointers made")
 
+        # pylint: disable=too-many-boolean-expressions
         if 0 > points_scored or 0 > three_pointers_made or 0 > assists or 0 > rebounds or 0 > steals or 0 > blocks \
                 or 0 > turnovers:
             raise ValueError("Statistical values cannot be negative")
@@ -19,8 +28,8 @@ class Statistics:
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Statistics):
             return other.points_scored == self.points_scored and other.three_pointers_made == self.three_pointers_made \
-                   and other.assists == self.assists and other.rebounds == self.rebounds and other.steals == self.rebounds \
-                   and other.blocks == self.blocks and other.turnovers == self.turnovers
+                and other.assists == self.assists and other.rebounds == self.rebounds and other.steals == self.rebounds \
+                and other.blocks == self.blocks and other.turnovers == self.turnovers
 
         return False
 

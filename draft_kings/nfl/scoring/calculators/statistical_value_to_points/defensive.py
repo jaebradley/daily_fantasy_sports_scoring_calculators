@@ -40,37 +40,54 @@ class FumbleRecoveriesCalculator(StatisticalCategoryPointsCalculator):
 
 class PuntReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(PuntReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            PuntReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
 class KickoffReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(KickoffReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            KickoffReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
 class FieldGoalReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(FieldGoalReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            FieldGoalReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
-class InterceptionReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
+class InterceptionReturnTouchdownsCalculator(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(InterceptionReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            InterceptionReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
 class FumbleRecoveryTouchdownsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(FumbleRecoveryTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            FumbleRecoveryTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
-class BlockedPuntReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
+class BlockedPuntReturnTouchdownsCalculator(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(BlockedPuntReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            BlockedPuntReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
-class BlockedFieldGoalReturnTouchdownsCalculator(StatisticalCategoryPointsCalculator):
+class BlockedFieldGoalReturnTouchdownsCalculator(
+        StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(BlockedFieldGoalReturnTouchdownsValueCalculator(), touchdowns_points_calculator)
+        super().__init__(
+            BlockedFieldGoalReturnTouchdownsValueCalculator(),
+            touchdowns_points_calculator)
 
 
 class SafetiesCalculator(StatisticalCategoryPointsCalculator):
@@ -85,7 +102,9 @@ class BlockedKicksCalculator(StatisticalCategoryPointsCalculator):
 
 class ConversionReturnsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
-        super().__init__(ConversionReturnsValueCalculator(), ConversionReturnsPointsCalculator())
+        super().__init__(
+            ConversionReturnsValueCalculator(),
+            ConversionReturnsPointsCalculator())
 
 
 class PointsAllowedCalculator(StatisticalCategoryPointsCalculator):

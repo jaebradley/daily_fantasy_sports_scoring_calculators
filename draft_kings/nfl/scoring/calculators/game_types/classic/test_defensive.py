@@ -15,17 +15,21 @@ class TestPointsCalculator(TestCase):
                 DefensiveStatistics(
                     scoring=ScoringStatistics(
                         touchdowns=TouchdownStatistics(
-                            kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                            blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-                            turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-                        ),
+                            kick_returns=KickReturnTouchdownStatistics(
+                                punts=0,
+                                kickoffs=0,
+                                field_goals=0),
+                            blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                                punts=0,
+                                field_goals=0),
+                            turnovers=TurnoverReturnTouchdownStatistics(
+                                interceptions=0,
+                                fumble_recoveries=0)),
                         safeties=0,
-                        conversion_returns=0
-                    ),
-                    turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                        conversion_returns=0),
+                    turnovers=TurnoverStatistics(
+                        interceptions=0,
+                        fumble_recoveries=0),
                     sacks=0,
                     blocked_kicks=0,
-                    points_allowed=PointsAllowed._21_to_27
-                )
-            )
-        )
+                    points_allowed=PointsAllowed._21_TO_27)))
