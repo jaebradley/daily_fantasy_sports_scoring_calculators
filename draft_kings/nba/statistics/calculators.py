@@ -62,26 +62,3 @@ class DoubleFigureValueCalculator(ConditionEvaluator):
     def test(self, value):
         return self.minimum_values_that_must_be_at_least_ten <= sum(map(
             lambda calculator: 10 <= calculator.calculate_value(value), self.calculators))
-
-
-points_scored_value_calculator = PointsScoredValueCalculator()
-three_pointers_made_value_calculator = ThreePointersMadeValueCalculator()
-assists_value_calculator = AssistsValueCalculator()
-blocks_value_calculator = BlocksValueCalculator()
-steals_value_calculator = StealsValueCalculator()
-rebounds_value_calculator = ReboundsValueCalculator()
-turnovers_value_calculator = TurnoversValueCalculator()
-double_double_value_calculator = DoubleFigureValueCalculator(
-    points_scored_value_calculator,
-    assists_value_calculator,
-    rebounds_value_calculator,
-    steals_value_calculator,
-    blocks_value_calculator,
-    2)
-triple_double_value_calculator = DoubleFigureValueCalculator(
-    points_scored_value_calculator,
-    assists_value_calculator,
-    rebounds_value_calculator,
-    steals_value_calculator,
-    blocks_value_calculator,
-    3)
