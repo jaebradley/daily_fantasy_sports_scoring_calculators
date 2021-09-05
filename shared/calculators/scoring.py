@@ -45,7 +45,7 @@ class CaptainPointsCalculator:
         raise NotImplementedError()
 
 
-class StatisticalCategoryPointsCalculator:
+class StatisticalCategoryPointsCalculator(PointsCalculator):
     def __init__(
             self,
             value_calculator: StatisticalValueCalculator,
@@ -53,9 +53,10 @@ class StatisticalCategoryPointsCalculator:
         self.value_calculator = value_calculator
         self.points_calculator = points_calculator
 
-    def calculate_points(self, statistics):
+    def calculate_points(self, value):
         return self.points_calculator.calculate_points(
-            value=self.value_calculator.calculate_value(statistics))
+            value=self.value_calculator.calculate_value(statistics=value)
+        )
 
     def __eq__(self, o: object) -> bool:
         if isinstance(o, StatisticalCategoryPointsCalculator):
@@ -74,7 +75,7 @@ class GameTypePointsCalculator(PointsCalculator):
     def calculate_points(self, value):
         return sum(
             map(
-                lambda calculator: calculator.calculate_points(statistics=value),
+                lambda calculator: calculator.calculate_points(value=value),
                 self.calculators
             )
         )
