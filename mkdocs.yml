@@ -1,0 +1,20 @@
+site_name: Daily Fantasy Sports Scoring Calculators
+site_url: https://jaebadley.github.io/daily_fantasy_sports_scoring_calculators
+site_author: Jae Bradley
+repo_name: jaebradley/daily_fantasy_sports_scoring_calculators
+repo_url: https://github.com/jaebradley/daily_fantasy_sports_scoring_calculators
+nav:
+  - Home: index.md
+  - API: api.md
+  - Development: development.md
+theme: material
+markdown_extensions:
+  - admonition
+  - codehilite:
+      linenums: true
+  - pymdownx.magiclink
+  - pymdownx.tabbed
+  - pymdownx.tilde
+  - pymdownx.superfences
+  - toc:
+      permalink: true
