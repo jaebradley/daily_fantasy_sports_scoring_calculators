@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from draft_kings.nba.scoring.calculators.game_types.classic import points_calculator
-from draft_kings.nba.statistics import Statistics
+from draft_kings.nba.statistics.models import Statistics
 
 
 class TestPointsCalculator(TestCase):

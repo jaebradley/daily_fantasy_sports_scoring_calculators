@@ -3,15 +3,15 @@ from enum import Enum
 
 from .offensive import KickReturnTouchdownStatistics
 
-"""
-From https://www.draftkings.com/help/rules/1/1:
-"The following scoring plays will result in Points Allowed by your Defense/Special Teams:
-Rushing TDs, Passing TDs, Offensive Fumble Recovery TDs, Punt Return TDs, Kick Return TDs, FG Return TDs, Blocked FG TDs, Blocked Punt TDs
-2pt conversions
-2 Point Conversion/Extra-point Returns
-Extra-points
-Field-goals"
-"""
+
+# From https://www.draftkings.com/help/rules/1/1:
+# "The following scoring plays will result in Points Allowed by your Defense/Special Teams:
+# Rushing TDs, Passing TDs, Offensive Fumble Recovery TDs, Punt Return TDs, Kick Return TDs, FG Return TDs,
+# Blocked FG TDs, Blocked Punt TDs
+# 2pt conversions
+# 2 Point Conversion/Extra-point Returns
+# Extra-points
+# Field-goals"
 
 
 class PointsAllowed(Enum):

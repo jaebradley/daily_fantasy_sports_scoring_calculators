@@ -39,7 +39,7 @@ class TurnoversValueCalculator(StatisticalValueCalculator):
 
 
 class DoubleFigureValueCalculator(ConditionEvaluator):
-    def __init__(
+    def __init__( # pylint: disable=too-many-arguments
             self,
             points_scored_value_calculator: StatisticalValueCalculator,
             assists_value_calculator: StatisticalValueCalculator,

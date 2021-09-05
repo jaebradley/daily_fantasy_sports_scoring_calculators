@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from draft_kings.nba.statistics import Statistics
+from draft_kings.nba.statistics.models import Statistics
 
 
 class TestStatistics(TestCase):

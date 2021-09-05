@@ -71,10 +71,10 @@ class GameTypePointsCalculator(PointsCalculator):
     def __init__(self, calculators: Set[StatisticalCategoryPointsCalculator]):
         self.calculators = calculators
 
-    def calculate_points(self, statistics):
+    def calculate_points(self, value):
         return sum(
             map(
-                lambda calculator: calculator.calculate_points(statistics),
+                lambda calculator: calculator.calculate_points(statistics=value),
                 self.calculators
             )
         )
@@ -91,8 +91,7 @@ class CaptainGameTypePointsCalculator(CaptainPointsCalculator):
         self.points_modifier_when_not_captain = points_modifier_when_not_captain
 
     def calculate_points(self, value, is_captain: bool):
-        points = self.statistical_points_calculator.calculate_points(
-            statistics=value)
+        points = self.statistical_points_calculator.calculate_points(value=value)
         if is_captain is True:
             return self.points_modifier_when_captain * points
 

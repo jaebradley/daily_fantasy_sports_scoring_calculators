@@ -1,7 +1,8 @@
 from unittest import TestCase
 
 from draft_kings.nfl.statistics.models.offensive import KickReturnTouchdownStatistics, TouchdownStatistics, \
-    TwoPointConversionStatistics, TurnoverStatistics, OffensiveStatistics, YardageStatistics, ScoringStatistics, ConversionStatistics
+    TwoPointConversionStatistics, TurnoverStatistics, OffensiveStatistics, YardageStatistics, ScoringStatistics, \
+    ConversionStatistics
 
 
 class TestKickReturnTouchdownStatistics(TestCase):

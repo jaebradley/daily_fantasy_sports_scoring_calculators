@@ -158,7 +158,8 @@ disable=print-statement,
         missing-class-docstring,
         missing-function-docstring,
         missing-module-docstring,
-        misplaced-comparison-constant
+        misplaced-comparison-constant,
+        protected-access
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
