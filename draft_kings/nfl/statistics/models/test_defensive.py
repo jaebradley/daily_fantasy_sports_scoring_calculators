@@ -31,7 +31,8 @@ class TestBlockedKickReturnTouchdownStatistics(TestCase):
         for punts in range(0, 2):
             for field_goals in range(0, 2):
                 try:
-                    BlockedKickReturnTouchdownStatistics(punts=punts, field_goals=field_goals)
+                    BlockedKickReturnTouchdownStatistics(
+                        punts=punts, field_goals=field_goals)
                 except ValueError:
                     self.fail("expected object creation to succeed")
 
@@ -42,8 +43,8 @@ class TestTurnoverReturnTouchdownStatistics(TestCase):
             for fumble_recoveries in range(-1, 1):
                 if 0 != interceptions and 0 != fumble_recoveries:
                     try:
-                        TurnoverReturnTouchdownStatistics(interceptions=interceptions,
-                                                          fumble_recoveries=fumble_recoveries)
+                        TurnoverReturnTouchdownStatistics(
+                            interceptions=interceptions, fumble_recoveries=fumble_recoveries)
                         self.fail("expected object creation to fail")
                     except ValueError:
                         continue
@@ -52,7 +53,8 @@ class TestTurnoverReturnTouchdownStatistics(TestCase):
         for interceptions in range(0, 2):
             for fumble_recoveries in range(0, 2):
                 try:
-                    TurnoverReturnTouchdownStatistics(interceptions=interceptions, fumble_recoveries=fumble_recoveries)
+                    TurnoverReturnTouchdownStatistics(
+                        interceptions=interceptions, fumble_recoveries=fumble_recoveries)
                 except ValueError:
                     self.fail("expected object creation to succeed")
 
@@ -60,18 +62,26 @@ class TestTurnoverReturnTouchdownStatistics(TestCase):
 class TestScoringStatistics(TestCase):
     def setUp(self) -> None:
         self.touchdowns = TouchdownStatistics(
-            kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-            blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-            turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-        )
+            kick_returns=KickReturnTouchdownStatistics(
+                punts=0,
+                kickoffs=0,
+                field_goals=0),
+            blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                punts=0,
+                field_goals=0),
+            turnovers=TurnoverReturnTouchdownStatistics(
+                interceptions=0,
+                fumble_recoveries=0))
 
     def test_invalid_values(self):
         for safeties in range(-1, 1):
             for conversion_returns in range(-1, 1):
                 if 0 != safeties and 0 != conversion_returns:
                     try:
-                        ScoringStatistics(touchdowns=self.touchdowns, safeties=safeties,
-                                          conversion_returns=conversion_returns)
+                        ScoringStatistics(
+                            touchdowns=self.touchdowns,
+                            safeties=safeties,
+                            conversion_returns=conversion_returns)
                         self.fail("expected object creation to fail")
                     except ValueError:
                         continue
@@ -80,8 +90,10 @@ class TestScoringStatistics(TestCase):
         for safeties in range(0, 2):
             for conversion_returns in range(0, 2):
                 try:
-                    ScoringStatistics(touchdowns=self.touchdowns, safeties=safeties,
-                                      conversion_returns=conversion_returns)
+                    ScoringStatistics(
+                        touchdowns=self.touchdowns,
+                        safeties=safeties,
+                        conversion_returns=conversion_returns)
                 except ValueError:
                     self.fail("expected object creation to succeed")
 
@@ -92,7 +104,9 @@ class TestTurnoverStatistics(TestCase):
             for fumble_recoveries in range(-1, 1):
                 if 0 != interceptions and 0 != fumble_recoveries:
                     try:
-                        TurnoverStatistics(interceptions=interceptions, fumble_recoveries=fumble_recoveries)
+                        TurnoverStatistics(
+                            interceptions=interceptions,
+                            fumble_recoveries=fumble_recoveries)
                         self.fail("expected object creation to fail")
                     except ValueError:
                         continue
@@ -101,7 +115,9 @@ class TestTurnoverStatistics(TestCase):
         for interceptions in range(0, 2):
             for fumble_recoveries in range(0, 2):
                 try:
-                    TurnoverStatistics(interceptions=interceptions, fumble_recoveries=fumble_recoveries)
+                    TurnoverStatistics(
+                        interceptions=interceptions,
+                        fumble_recoveries=fumble_recoveries)
                 except ValueError:
                     self.fail("expected object creation to succeed")
 
@@ -112,102 +128,138 @@ class TestDefensiveStatistics(TestCase):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=0,
+                            field_goals=0),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=0,
+                            fumble_recoveries=0)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=-1,
                 blocked_kicks=0,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)
 
     def test_invalid_blocked_kicks(self):
         with self.assertRaises(ValueError):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=0,
+                            field_goals=0),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=0,
+                            fumble_recoveries=0)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=0,
                 blocked_kicks=-1,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)
 
         with self.assertRaises(ValueError):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=1, field_goals=0),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=1,
+                            field_goals=0),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=0,
+                            fumble_recoveries=0)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=0,
                 blocked_kicks=0,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)
 
         with self.assertRaises(ValueError):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=1),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=0)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=0,
+                            field_goals=1),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=0,
+                            fumble_recoveries=0)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=0,
                 blocked_kicks=0,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)
 
     def test_invalid_turnovers(self):
         with self.assertRaises(ValueError):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=1, fumble_recoveries=0)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=0,
+                            field_goals=0),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=1,
+                            fumble_recoveries=0)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=0,
                 blocked_kicks=0,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)
 
         with self.assertRaises(ValueError):
             DefensiveStatistics(
                 scoring=ScoringStatistics(
                     touchdowns=TouchdownStatistics(
-                        kick_returns=KickReturnTouchdownStatistics(punts=0, kickoffs=0, field_goals=0),
-                        blocked_kicks=BlockedKickReturnTouchdownStatistics(punts=0, field_goals=0),
-                        turnovers=TurnoverReturnTouchdownStatistics(interceptions=0, fumble_recoveries=1)
-                    ),
+                        kick_returns=KickReturnTouchdownStatistics(
+                            punts=0,
+                            kickoffs=0,
+                            field_goals=0),
+                        blocked_kicks=BlockedKickReturnTouchdownStatistics(
+                            punts=0,
+                            field_goals=0),
+                        turnovers=TurnoverReturnTouchdownStatistics(
+                            interceptions=0,
+                            fumble_recoveries=1)),
                     safeties=0,
-                    conversion_returns=0
-                ),
-                turnovers=TurnoverStatistics(interceptions=0, fumble_recoveries=0),
+                    conversion_returns=0),
+                turnovers=TurnoverStatistics(
+                    interceptions=0,
+                    fumble_recoveries=0),
                 sacks=0,
                 blocked_kicks=0,
-                points_allowed=PointsAllowed._0
-            )
+                points_allowed=PointsAllowed._0)

@@ -12,7 +12,8 @@ class PassingYardageCalculator(StatisticalValueCalculator):
         return statistics.yards.passing
 
 
-class HasAchievedMinimumYardageRequirementCalculator(StatisticalValueCalculator):
+class HasAchievedMinimumYardageRequirementCalculator(
+        StatisticalValueCalculator):
     def __init__(self, yardage_value_calculator: StatisticalValueCalculator,
                  minimum_inclusive_required_yardage: int) -> None:
         super().__init__()
@@ -21,17 +22,20 @@ class HasAchievedMinimumYardageRequirementCalculator(StatisticalValueCalculator)
 
     def calculate_value(self, statistics: OffensiveStatistics):
         return self.minimum_inclusive_required_yardage <= \
-               self.yardage_value_calculator.calculate_value(statistics=statistics)
+            self.yardage_value_calculator.calculate_value(statistics=statistics)
 
     def __eq__(self, o: object) -> bool:
         if isinstance(o, HasAchievedMinimumYardageRequirementCalculator):
             return self.yardage_value_calculator == o.yardage_value_calculator and \
-                   o.minimum_inclusive_required_yardage == self.minimum_inclusive_required_yardage and super().__eq__(o)
+                o.minimum_inclusive_required_yardage == self.minimum_inclusive_required_yardage and super().__eq__(o)
 
         return False
 
     def __hash__(self) -> int:
-        return hash((self.yardage_value_calculator, self.minimum_inclusive_required_yardage, super().__hash__()))
+        return hash(
+            (self.yardage_value_calculator,
+             self.minimum_inclusive_required_yardage,
+             super().__hash__()))
 
 
 class InterceptionsCalculator(StatisticalValueCalculator):

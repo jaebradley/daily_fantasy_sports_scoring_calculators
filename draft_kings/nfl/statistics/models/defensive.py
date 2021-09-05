@@ -3,38 +3,49 @@ from enum import Enum
 
 from .offensive import KickReturnTouchdownStatistics
 
-"""
-From https://www.draftkings.com/help/rules/1/1:
-"The following scoring plays will result in Points Allowed by your Defense/Special Teams:
-Rushing TDs, Passing TDs, Offensive Fumble Recovery TDs, Punt Return TDs, Kick Return TDs, FG Return TDs, Blocked FG TDs, Blocked Punt TDs
-2pt conversions
-2 Point Conversion/Extra-point Returns
-Extra-points
-Field-goals"
-"""
+
+# From https://www.draftkings.com/help/rules/1/1:
+# "The following scoring plays will result in Points Allowed by your Defense/Special Teams:
+# Rushing TDs, Passing TDs, Offensive Fumble Recovery TDs, Punt Return TDs, Kick Return TDs, FG Return TDs,
+# Blocked FG TDs, Blocked Punt TDs
+# 2pt conversions
+# 2 Point Conversion/Extra-point Returns
+# Extra-points
+# Field-goals"
 
 
 class PointsAllowed(Enum):
     _0 = "0 Points Allowed"
-    _1_to_6 = "1 – 6 Points Allowed"
-    _7_to_13 = "7 – 13 Points Allowed"
-    _14_to_20 = "14 – 20 Points Allowed"
-    _21_to_27 = "21 – 27 Points Allowed"
-    _28_to_24 = "28 – 34 Points Allowed"
-    _35_or_more = "35+ Points Allowed"
+    _1_TO_6 = "1 – 6 Points Allowed"
+    _7_TO_13 = "7 – 13 Points Allowed"
+    _14_TO_20 = "14 – 20 Points Allowed"
+    _21_TO_27 = "21 – 27 Points Allowed"
+    _28_TO_24 = "28 – 34 Points Allowed"
+    _35_OR_MORE = "35+ Points Allowed"
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class BlockedKickReturnTouchdownStatistics:
     punts: int
     field_goals: int
 
     def __post_init__(self):
         if 0 > self.punts or 0 > self.field_goals:
-            raise ValueError("blocked punt or field goals returned for touchdowns cannot be negative")
+            raise ValueError(
+                "blocked punt or field goals returned for touchdowns cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TurnoverReturnTouchdownStatistics:
     interceptions: int
     fumble_recoveries: int
@@ -44,14 +55,24 @@ class TurnoverReturnTouchdownStatistics:
             raise ValueError("touchdowns cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TouchdownStatistics:
     kick_returns: KickReturnTouchdownStatistics
     blocked_kicks: BlockedKickReturnTouchdownStatistics
     turnovers: TurnoverReturnTouchdownStatistics
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class ScoringStatistics:
     touchdowns: TouchdownStatistics
     safeties: int
@@ -65,7 +86,12 @@ class ScoringStatistics:
             raise ValueError("conversion returns cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TurnoverStatistics:
     interceptions: int
     fumble_recoveries: int
@@ -78,7 +104,12 @@ class TurnoverStatistics:
             raise ValueError("fumble recoveries cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class DefensiveStatistics:
     scoring: ScoringStatistics
     turnovers: TurnoverStatistics
@@ -100,12 +131,11 @@ class DefensiveStatistics:
             raise ValueError("blocked kicks cannot be negative")
 
         if self.blocked_kicks < (
-                self.scoring.touchdowns.blocked_kicks.field_goals + self.scoring.touchdowns.blocked_kicks.punts
-        ):
+                self.scoring.touchdowns.blocked_kicks.field_goals +
+                self.scoring.touchdowns.blocked_kicks.punts):
             raise ValueError(
                 "blocked kicks must be greater than or equal to the number of blocked field goals or punts returned "
-                "for a touchdown"
-            )
+                "for a touchdown")
 
         if self.turnovers.fumble_recoveries < self.scoring.touchdowns.turnovers.fumble_recoveries:
             raise ValueError(

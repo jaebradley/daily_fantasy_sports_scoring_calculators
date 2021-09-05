@@ -23,8 +23,8 @@ class HasAchievedMinimumYardageRequirementCalculator(ConditionalPointsCalculator
         super().__init__(
             YardageLimitAchievedCalculator(),
             zero_points_calculator,
-            HasAchievedMinimumValueRequirement(minimum_inclusive_required_value=minimum_inclusive_required_yardage)
-        )
+            HasAchievedMinimumValueRequirement(
+                minimum_inclusive_required_value=minimum_inclusive_required_yardage))
 
 
 class HasAchievedAtLeast300YardsCalculator(HasAchievedMinimumYardageRequirementCalculator):

@@ -1,14 +1,24 @@
 from dataclasses import dataclass
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class YardageStatistics:
     passing: int
     rushing: int
     receiving: int
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class KickReturnTouchdownStatistics:
     punts: int
     kickoffs: int
@@ -19,7 +29,12 @@ class KickReturnTouchdownStatistics:
             raise ValueError("touchdowns cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TouchdownStatistics:
     passing: int
     rushing: int
@@ -32,7 +47,12 @@ class TouchdownStatistics:
             raise ValueError("touchdowns cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TwoPointConversionStatistics:
     thrown: int
     rushed: int
@@ -43,18 +63,33 @@ class TwoPointConversionStatistics:
             raise ValueError("conversions cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class ConversionStatistics:
     two_point: TwoPointConversionStatistics
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class ScoringStatistics:
     touchdowns: TouchdownStatistics
     conversions: ConversionStatistics
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class TurnoverStatistics:
     interceptions: int
     fumbles_lost: int
@@ -64,7 +99,12 @@ class TurnoverStatistics:
             raise ValueError("turnovers cannot be negative")
 
 
-@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=True)
+@dataclass(init=True,
+           repr=True,
+           eq=True,
+           order=False,
+           unsafe_hash=False,
+           frozen=True)
 class OffensiveStatistics:
     yards: YardageStatistics
     scoring: ScoringStatistics
