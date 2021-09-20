@@ -1,5 +1,5 @@
 from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.models.defensive import PointsAllowed
-from shared.calculators.scoring import PointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import PointsCalculator
 
 points_by_points_allowed = {
     PointsAllowed._0: 10,

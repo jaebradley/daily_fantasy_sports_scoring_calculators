@@ -7,7 +7,7 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.scoring.calculator
     KickReturnTouchdownsCalculator, FieldGoalReturnTouchdownsCalculator, FumblesLostCalculator, \
     TwoPointConversionsThrownCalculator, TwoPointConversionsCaughtCalculator, TwoPointConversionsRushedCalculator, \
     FumbleRecoveryTouchdownsCalculator
-from shared.calculators.scoring import GameTypePointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import GameTypePointsCalculator
 
 
 class PointsCalculator(GameTypePointsCalculator):

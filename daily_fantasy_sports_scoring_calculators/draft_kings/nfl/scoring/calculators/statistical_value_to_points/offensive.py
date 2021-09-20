@@ -1,3 +1,5 @@
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import StatisticalCategoryPointsCalculator, \
+    StatisticalValueCalculator
 from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.scoring.calculators.value_to_points.offensive import \
     PassingTouchdownsCalculator as PassingTouchdownsPointsCalculator, \
     HasAchievedAtLeast300YardsCalculator as HasAchievedAtLeast300PassingYardsPointsCalculator, \
@@ -26,7 +28,6 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.calcula
     FumbleRecoveryTouchdownsCalculator as FumbleRecoveryTouchdownsValueCalculator, \
     ReceivingYardageCalculator as ReceivingYardageValueCalculator, \
     PassingYardageCalculator as PassingYardageValueCalculator
-from shared.calculators.scoring import StatisticalCategoryPointsCalculator, StatisticalValueCalculator
 
 passing_yardage_value_calculator = PassingYardageValueCalculator()
 receiving_yardage_value_calculator = ReceivingYardageValueCalculator()

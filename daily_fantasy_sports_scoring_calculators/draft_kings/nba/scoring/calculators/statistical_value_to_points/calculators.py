@@ -1,3 +1,5 @@
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import StatisticalCategoryPointsCalculator, \
+    ConditionalPointsCalculator, zero_points_calculator
 from daily_fantasy_sports_scoring_calculators.draft_kings.nba.scoring.calculators.value_to_points.calculators import \
     points_scored_points_calculator, \
     three_pointers_made_points_calculator, assists_points_calculator, blocks_points_calculator, \
@@ -10,8 +12,6 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nba.statistics.calcula
     AssistsValueCalculator, \
     ReboundsValueCalculator, \
     StealsValueCalculator, BlocksValueCalculator, TurnoversValueCalculator, ThreePointersMadeValueCalculator
-from shared.calculators.scoring import StatisticalCategoryPointsCalculator, ConditionalPointsCalculator, \
-    zero_points_calculator
 
 
 class PointsScoredCalculator(StatisticalCategoryPointsCalculator):

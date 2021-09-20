@@ -1,4 +1,4 @@
-from shared.calculators.scoring import ConditionEvaluator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import ConditionEvaluator
 
 
 class HasAchievedMinimumValueRequirement(ConditionEvaluator):

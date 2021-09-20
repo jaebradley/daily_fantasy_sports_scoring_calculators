@@ -1,5 +1,5 @@
 from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.models.offensive import OffensiveStatistics
-from shared.calculators.scoring import StatisticalValueCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import StatisticalValueCalculator
 
 
 class PassingTouchdownsCalculator(StatisticalValueCalculator):

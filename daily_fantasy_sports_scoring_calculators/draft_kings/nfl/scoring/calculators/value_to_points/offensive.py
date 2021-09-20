@@ -1,7 +1,8 @@
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import PointsCalculator, \
+    ConditionalPointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import zero_points_calculator
 from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.calculators.conditions \
     import HasAchievedMinimumValueRequirement
-from shared.calculators.scoring import PointsCalculator, ConditionalPointsCalculator
-from shared.calculators.scoring import zero_points_calculator
 
 
 class PassingTouchdownsCalculator(PointsCalculator):

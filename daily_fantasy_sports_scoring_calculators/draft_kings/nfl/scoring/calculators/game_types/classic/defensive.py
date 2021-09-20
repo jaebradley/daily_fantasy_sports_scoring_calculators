@@ -8,7 +8,7 @@ from daily_fantasy_sports_scoring_calculators \
     FumbleRecoveryTouchdownsCalculator, BlockedPuntReturnTouchdownsCalculator, \
     BlockedFieldGoalReturnTouchdownsCalculator, \
     SafetiesCalculator, BlockedKicksCalculator, ConversionReturnsCalculator, PointsAllowedCalculator
-from shared.calculators.scoring import GameTypePointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import GameTypePointsCalculator
 
 
 class PointsCalculator(GameTypePointsCalculator):

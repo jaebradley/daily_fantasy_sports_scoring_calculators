@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from daily_fantasy_sports_scoring_calculators.draft_kings.nba import Statistics
+from daily_fantasy_sports_scoring_calculators.draft_kings.nba.statistics.models import Statistics
 
 
 class TestStatistics(TestCase):

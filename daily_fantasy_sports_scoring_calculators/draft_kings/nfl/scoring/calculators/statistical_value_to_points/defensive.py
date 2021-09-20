@@ -19,7 +19,7 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.calcula
     BlockedKicksCalculator as BlockedKicksValueCalculator, \
     ConversionReturnsCalculator as ConversionReturnsValueCalculator, \
     PointsAllowedCalculator as PointsAllowedValueCalculator
-from shared.calculators.scoring import StatisticalCategoryPointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import StatisticalCategoryPointsCalculator
 
 turnovers_points_calculator = TurnoversPointsCalculator()
 touchdowns_points_calculator = TouchdownsPointsCalculator()

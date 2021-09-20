@@ -1,6 +1,6 @@
 from daily_fantasy_sports_scoring_calculators.draft_kings.nba.statistics.models import Statistics
-from shared.calculators.scoring import ConditionEvaluator
-from shared.calculators.scoring import StatisticalValueCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import ConditionEvaluator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import StatisticalValueCalculator
 
 
 class PointsScoredValueCalculator(StatisticalValueCalculator):

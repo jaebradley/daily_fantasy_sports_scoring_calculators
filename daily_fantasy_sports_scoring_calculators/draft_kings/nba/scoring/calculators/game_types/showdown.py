@@ -1,6 +1,6 @@
 from daily_fantasy_sports_scoring_calculators.draft_kings.nba.scoring.calculators.game_types.classic import \
     points_calculator as classic_points_calculator
-from shared.calculators.scoring import CaptainGameTypePointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import CaptainGameTypePointsCalculator
 
 
 class PointsCalculator(CaptainGameTypePointsCalculator):

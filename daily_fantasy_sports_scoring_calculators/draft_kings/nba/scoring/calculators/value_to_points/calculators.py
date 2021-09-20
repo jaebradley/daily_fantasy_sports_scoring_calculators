@@ -1,4 +1,4 @@
-from shared.calculators.scoring import PointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import PointsCalculator
 
 
 class PointsScoredPointsCalculator(PointsCalculator):

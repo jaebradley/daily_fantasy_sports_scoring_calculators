@@ -2,7 +2,7 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nba.scoring.calculator
     .calculators import PointsScoredCalculator, \
     ThreePointersMadeCalculator, AssistsCalculator, BlocksCalculator, StealsCalculator, \
     ReboundsCalculator, TurnoversCalculator, DoubleDoubleCalculator, TripleDoubleCalculator
-from shared.calculators.scoring import GameTypePointsCalculator
+from daily_fantasy_sports_scoring_calculators.core.calculators.scoring import GameTypePointsCalculator
 
 
 class PointsCalculator(GameTypePointsCalculator):
