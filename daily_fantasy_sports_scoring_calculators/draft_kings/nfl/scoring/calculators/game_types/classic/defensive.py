@@ -1,4 +1,8 @@
-from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.scoring.calculators.statistical_value_to_points.defensive import SacksCalculator, \
+from daily_fantasy_sports_scoring_calculators \
+    .draft_kings.nfl \
+    .scoring.calculators \
+    .statistical_value_to_points \
+    .defensive import SacksCalculator, \
     InterceptionsCalculator, FumbleRecoveriesCalculator, PuntReturnTouchdownsCalculator, \
     KickoffReturnTouchdownsCalculator, FieldGoalReturnTouchdownsCalculator, InterceptionReturnTouchdownsCalculator, \
     FumbleRecoveryTouchdownsCalculator, BlockedPuntReturnTouchdownsCalculator, \

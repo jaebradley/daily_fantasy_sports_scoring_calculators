@@ -8,8 +8,8 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.scoring.calculator
     TurnoversCalculator as TurnoversPointsCalculator, \
     TwoPointConversionsCalculator as TwoPointConversionsPointsCalculator, \
     ReceptionsCalculator as ReceptionsPointsCalculator
-from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.calculators import PassingTouchdownsCalculator as \
-    PassingTouchdownsValueCalculator, \
+from daily_fantasy_sports_scoring_calculators.draft_kings.nfl.statistics.calculators.offensive import \
+    PassingTouchdownsCalculator as PassingTouchdownsValueCalculator, \
     HasAchievedMinimumYardageRequirementCalculator as HasAchievedMinimumYardageRequirementValueCalculator, \
     InterceptionsCalculator as InterceptionsValueCalculator, \
     RushingTouchdownsCalculator as RushingTouchdownsValueCalculator, \
@@ -47,8 +47,7 @@ class NonPassingTouchdownsCalculator(StatisticalCategoryPointsCalculator):
         super().__init__(value_calculator, NonPassingTouchdownsPointsCalculator())
 
 
-class HasAchievedAtLeast300PassingYardsCalculator(
-        StatisticalCategoryPointsCalculator):
+class HasAchievedAtLeast300PassingYardsCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             HasAchievedMinimumYardageRequirementValueCalculator(
@@ -98,7 +97,7 @@ class RushingYardageCalculator(StatisticalCategoryPointsCalculator):
 
 
 class HasReached100YardsRushingPointsLimit(
-        StatisticalCategoryPointsCalculator):
+    StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             HasAchievedMinimumYardageRequirementValueCalculator(
@@ -121,8 +120,7 @@ class ReceivingYardsCalculator(StatisticalCategoryPointsCalculator):
             non_passing_yards_points_calculator)
 
 
-class HasReached100YardsReceivingCalculator(
-        StatisticalCategoryPointsCalculator):
+class HasReached100YardsReceivingCalculator(StatisticalCategoryPointsCalculator):
     def __init__(self):
         super().__init__(
             value_calculator=HasAchievedMinimumYardageRequirementValueCalculator(

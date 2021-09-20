@@ -4,7 +4,8 @@ from daily_fantasy_sports_scoring_calculators.draft_kings.nba.scoring.calculator
     steals_points_calculator, \
     rebounds_points_calculator, turnovers_points_calculator, double_double_points_calculator, \
     triple_double_points_calculator
-from daily_fantasy_sports_scoring_calculators.draft_kings.nba.statistics.calculators import DoubleFigureValueCalculator, \
+from daily_fantasy_sports_scoring_calculators.draft_kings.nba.statistics.calculators \
+    import DoubleFigureValueCalculator, \
     PointsScoredValueCalculator, \
     AssistsValueCalculator, \
     ReboundsValueCalculator, \
